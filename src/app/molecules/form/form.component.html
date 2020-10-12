@@ -1,0 +1,48 @@
+<form [formGroup]="signUpForm" (ngSubmit)="signUp(signUpForm.value)" *ngIf="register">
+  <div class="form-group">
+    <app-atom-label for="userName" labelName="Name"></app-atom-label>
+    <input type="text" formControlName="userName" id="userName" class="form-control">
+  </div>
+  <div class="form-group">
+    <app-atom-label for="userEmail" labelName="Email"></app-atom-label>
+    <input type="text" formControlName="email" id="userEmail" class="form-control">
+  </div>
+  <div class="form-group">
+    <app-atom-label for="userPass" labelName="Password"></app-atom-label>
+    <input type="text" formControlName="password" id="userPass" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-dark" [disabled]="!signUpForm.valid" (click)="modalRef.hide()">create</button>
+</form>
+<form [formGroup]="signInForm" (ngSubmit)="signIn(signInForm.value)" *ngIf="login">
+  <div class="form-group">
+    <app-atom-label for="userEmail" labelName="Email"></app-atom-label>
+    <input type="text" formControlName="email" id="userEmail" class="form-control">
+  </div>
+  <div class="form-group">
+    <app-atom-label for="userPass" labelName="Password"></app-atom-label>
+    <input type="text" formControlName="password" id="userPass" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-dark" [disabled]="!signInForm.valid">login</button>
+</form>
+<form [formGroup]="createPost" (ngSubmit)="newPost(createPost.value)" *ngIf="addPost">
+  <div class="form-group">
+    <app-atom-label for="title" labelName="Title"></app-atom-label>
+    <input type="text" formControlName="title" id="title" class="form-control">
+  </div>
+  <div class="form-group">
+    <app-atom-label for="text" labelName="Text"></app-atom-label>
+    <textarea formControlName="text" name="text" id="text" class="form-control"></textarea>
+  </div>
+  <button type="submit" class="btn btn-outline-success" [disabled]="!createPost.valid">add post</button>
+</form>
+<form [formGroup]="updatePostForm" (ngSubmit)="updatePost(updatePostForm.value)" *ngIf="update">
+  <div class="form-group">
+    <app-atom-label for="title" labelName="Title"></app-atom-label>
+    <input type="text" formControlName="title" id="title" class="form-control">
+  </div>
+  <div class="form-group">
+    <app-atom-label for="text" labelName="Text"></app-atom-label>
+    <textarea formControlName="text" name="text" id="text" class="form-control"></textarea>
+  </div>
+  <button type="submit" class="btn btn-outline-success" [disabled]="!updatePostForm.valid">save edit</button>
+</form>

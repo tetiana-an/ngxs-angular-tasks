@@ -1,0 +1,14 @@
+<div class="left">
+  <form class="form" #blogForm="ngForm">
+    <div class="form-group">
+      <input type="number" placeholder="regId" class="form-control" #id>
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="name" class="form-control" #name>
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="address" class="form-control" #address>
+    </div>
+    <button type="reset" class="btn btn-success" (click)="addStudent(id.value, name.value, address.value)" [disabled]='blogForm.invalid'>Add a Student</button>
+  </form>
+</div>

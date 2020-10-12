@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "password": "1111",
+      "role": "admin",
+      "id": 1
+    },
+    {
+      "name": "Tania",
+      "email": "user@gmail.com",
+      "password": "2222",
+      "role": "user",
+      "id": 2
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "userID": 1,
+      "title": "First post",
+      "author": "admin",
+      "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum reprehenderit perspiciatis non id eius, aliquam dolore magnam officia odit provident.",
+      "date": "2020-10-11T22:47:26.090Z"
+    },
+    {
+      "id": 2,
+      "userID": 2,
+      "title": "Second Post",
+      "author": "Tania",
+      "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum reprehenderit perspiciatis non id eius, aliquam dolore magnam officia odit provident.",
+      "date": "2020-10-11T22:48:21.589Z"
+    }
+  ]
+}

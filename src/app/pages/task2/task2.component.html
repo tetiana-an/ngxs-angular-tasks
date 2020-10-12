@@ -1,0 +1,18 @@
+<div class="content">
+  <div class="btn-group">
+    <app-atom-button label="Sign Up" btnClass="btn btn-outline-primary" (click)="signUp(template)"></app-atom-button>
+    <app-atom-button label="Sign In" btnClass="btn btn-outline-success" (click)="signIn(template)"></app-atom-button>
+    <app-atom-button label="Add Post" btnClass="btn btn-outline-info" (click)="addPost(template)"*ngIf="currentUser"></app-atom-button>
+  </div>
+  <app-card></app-card>
+</div>
+<ng-template #template>
+  <div class="modal-header">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()" (click)="reset()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-form [register]="isRegister" [login]="isLogin" [addPost]="isCreatePost"></app-form>
+  </div>
+</ng-template>

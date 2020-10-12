@@ -1,0 +1,47 @@
+<div class="right">
+  <h3>Student Registry</h3>
+  <table class="table">
+    <thead>
+      <th>#</th>
+      <th>id</th>
+      <th>name</th>
+      <th>address</th>
+      <th>edit</th>
+      <th>delete</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of students$ | async; let i=index">
+        <td>{{ i+1 }}</td>
+        <td>{{ s.regId }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.address }}</td>
+        <td><button type="button" (click)="openModal(template)" (click)="editStudent(s, i)"
+            class="btn btn-warning">edit</button>
+        </td>
+        <td><button type="button" (click)="delStudent(s.regId)" class="btn btn-danger">delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <ng-template #template>
+    <div class="modal-header">
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form class="form" (ngSubmit)="saveEditStudent(changeForm.value)" [formGroup]="changeForm">
+        <div class="form-group">
+          <input type="number" placeholder="edit regId" class="form-control" formControlName="id" [(ngModel)]="id" name="id">
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="edit name" class="form-control" formControlName="name" [(ngModel)]="name" name="name">
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="edit address" class="form-control" formControlName="address" [(ngModel)]="address" name="address">
+        </div>
+        <button type="submit" style="float: right;" class="btn btn-warning">Save</button>
+      </form>
+    </div>
+  </ng-template>
+</div>
