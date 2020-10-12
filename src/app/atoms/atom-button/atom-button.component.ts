@@ -12,6 +12,7 @@ export class AtomButtonComponent{
   @Input() btnClass = 'btn';
   @Input() type: any;
   
+  
   onClick(){
     this.click.emit();
   }

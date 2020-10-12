@@ -5,6 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { GetPosts, RemovePost } from 'src/app/shared/actions/posts.action';
 import { UserPost } from 'src/app/shared/models/post.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { PostState } from 'src/app/shared/states/posts.state';
 
 @Component({
@@ -28,11 +29,25 @@ export class CardComponent implements OnInit {
   changePost: boolean;
 
   constructor(private store: Store,
-    private modalService: BsModalService) { }
+    private modalService: BsModalService, private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.currentUser;
     this.store.dispatch(new GetPosts())
+    this.userInfo();
+    this.getLocalStorage();
+  }
+
+  private userInfo(): void {
+    this.auth.user.subscribe(() => {
+        this.getLocalStorage();
+      }
+    );
+  }
+
+  private getLocalStorage(): void {
+    if (localStorage.length > 0 && localStorage.getItem('localUser')) {
+      this.currentUser = JSON.parse(localStorage.getItem('localUser'));
+    }
   }
 
   editPost(post: UserPost, template: TemplateRef<any>) {

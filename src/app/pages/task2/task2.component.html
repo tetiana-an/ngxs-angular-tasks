@@ -2,8 +2,8 @@
   <div class="btn-group">
     <app-atom-button label="Sign Up" btnClass="btn btn-outline-primary" (click)="signUp(template)"></app-atom-button>
     <app-atom-button label="Sign In" btnClass="btn btn-outline-success" (click)="signIn(template)"></app-atom-button>
-    <app-atom-button label="Add Post" btnClass="btn btn-outline-info" (click)="addPost(template)"*ngIf="currentUser"></app-atom-button>
-    <app-atom-button label="Test" btnClass="btn btn-outline-dark"></app-atom-button>
+    <app-atom-button label="Add Post" btnClass="btn btn-outline-info" (click)="addPost(template)" *ngIf="currentUser"></app-atom-button>
+    <app-atom-button label="Sign out" btnClass="btn btn-outline-dark" (click)="signOut()" *ngIf="currentUser"></app-atom-button>
   </div>
   <app-card></app-card>
 </div>
@@ -14,6 +14,6 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-form [register]="isRegister" [login]="isLogin" [addPost]="isCreatePost"></app-form>
+    <app-form [register]="isRegister" [login]="isLogin" [addPost]="isCreatePost" (closeClick)="modalRef.hide()"></app-form>
   </div>
 </ng-template>

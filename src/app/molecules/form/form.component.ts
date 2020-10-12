@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { UsersState } from 'src/app/shared/states/user.state';
@@ -9,7 +9,8 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { UserPost } from 'src/app/shared/models/post.model';
 import { AddPost, EditPost, GetPosts } from 'src/app/shared/actions/posts.action';
 import { PostState } from 'src/app/shared/states/posts.state';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-form',
@@ -28,7 +29,7 @@ export class FormComponent implements OnInit {
   @Input() login: boolean;
   @Input() addPost: boolean;
   @Input() update: boolean;
-
+  @Output() closeClick = new EventEmitter;
   @Select(UsersState.getUsers) users$: Observable<User[]>;
   @Select(PostState.getPosts) arrPost$: Observable<UserPost[]>;
   signUpForm: FormGroup;
@@ -38,9 +39,15 @@ export class FormComponent implements OnInit {
   currentUser = JSON.parse(localStorage.getItem('localUser'));
   currentPost = JSON.parse(localStorage.getItem('localPost'));
   arrPost: Array<UserPost> = [];
- 
+  user: any;
+  errorText = 'Please provide a valid email';
+  regError: boolean;
+  loginError: boolean;
+
   constructor( private formBuilder: FormBuilder,
-               private store: Store ) { }
+               private store: Store, private auth: AuthService, 
+               private modalService: BsModalService, private bsModalRef: BsModalRef ) { }
+               
                
   ngOnInit(): void {
     this.signUpForm = this.createUserForm();
@@ -96,11 +103,13 @@ export class FormComponent implements OnInit {
     this.users$.subscribe(
       data => {
         if (data.some(user => user.email == formData['email'])) {
-          console.log('regError');
+          this.regError = true;
+          this.errorText = 'This email already exist'          
         }
         else {
           this.store.dispatch(new AddUser(newUser))
           this.signUpForm.reset();
+          this.closeClick.emit()
         }
       }
     )
@@ -113,9 +122,13 @@ export class FormComponent implements OnInit {
           const person = data.filter(user => user.email == formData['email']);
           localStorage.setItem('localUser', JSON.stringify(person[0]));
           this.signInForm.reset();
+          this.currentUser = JSON.parse(localStorage.getItem('localUser'));
+          this.auth.user.next(this.currentUser);
+          this.closeClick.emit()
         }
         else {
-          console.log('loginError');
+          this.loginError = true;
+          this.errorText = 'Please provide a valid email or password';
         }
       }
     )
@@ -134,6 +147,7 @@ export class FormComponent implements OnInit {
       newPost.id = this.arrPost.slice(-1)[0].id + 1;
     }
     this.store.dispatch(new AddPost(newPost))
+    this.closeClick.emit()
   }
 
   updatePost(formData: FormGroup) {
@@ -145,9 +159,22 @@ export class FormComponent implements OnInit {
       text: formData['text'],
       date: this.currentPost.date
     }
+    this.closeClick.emit()
     this.store.dispatch(new EditPost(updatePost))
     this.store.dispatch(new GetPosts());
     this.updatePostForm.reset()
+    
+  }
+
+  updateLocalUser(){
+    localStorage.setItem('localUser', JSON.stringify(this.user));
+  }
+
+  resetForm() {
+   this.register = false;
+   this.login = false;
+   this.addPost = false;
+   this.update= false;
   }
 
 }

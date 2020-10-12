@@ -18,6 +18,6 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-form [update]="changePost"></app-form>
+    <app-form [update]="changePost" (closeClick)="modalRef.hide()"></app-form>
   </div>
 </ng-template>

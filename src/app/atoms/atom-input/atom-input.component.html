@@ -1,1 +1,6 @@
-<input [type]="type" [id]="labelfor" placeholder="type here.." class="form-control">
+<!-- <input [type]="type" [id]="labelfor" placeholder="type here.." class="form-control"> -->
+
+<mat-form-field appearance="fill" >
+    <mat-label>{{labelName}}</mat-label>
+    <input matInput placeholder="pat@example.com" required formControlName="email">
+</mat-form-field>

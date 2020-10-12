@@ -4,7 +4,7 @@ import { BsModalRef, ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
@@ -34,6 +34,10 @@ import { CardComponent } from './molecules/card/card.component';
 import { AtomTextareaComponent } from './atoms/atom-textarea/atom-textarea.component';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 import { loaderConfig } from './preloader-config';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -66,7 +70,7 @@ import { loaderConfig } from './preloader-config';
     NgxsModule.forRoot([
       StudentState,
       UsersState,
-      PostState
+      PostState,
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
@@ -74,7 +78,9 @@ import { loaderConfig } from './preloader-config';
     ModalModule.forRoot(),
     NgxUiLoaderModule.forRoot(loaderConfig),
     NgxUiLoaderRouterModule,
-
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule
   ],
   providers: [AuthService, BsModalRef],
   bootstrap: [AppComponent]

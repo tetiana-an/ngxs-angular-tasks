@@ -6,24 +6,40 @@
   <div class="form-group">
     <app-atom-label for="userEmail" labelName="Email"></app-atom-label>
     <input type="text" formControlName="email" id="userEmail" class="form-control">
+    <div class="alert-danger"
+      *ngIf="signUpForm.controls['email'].invalid && signUpForm.controls['email'].touched || regError">
+      {{ errorText }}
+    </div>
   </div>
   <div class="form-group">
     <app-atom-label for="userPass" labelName="Password"></app-atom-label>
     <input type="text" formControlName="password" id="userPass" class="form-control">
   </div>
-  <button type="submit" class="btn btn-dark" [disabled]="!signUpForm.valid" (click)="modalRef.hide()">create</button>
+  <button type="submit" class="btn btn-dark" [disabled]="!signUpForm.valid">register</button>
 </form>
+
 <form [formGroup]="signInForm" (ngSubmit)="signIn(signInForm.value)" *ngIf="login">
   <div class="form-group">
     <app-atom-label for="userEmail" labelName="Email"></app-atom-label>
     <input type="text" formControlName="email" id="userEmail" class="form-control">
+    <div class="alert-danger"
+      *ngIf="signInForm.controls['email'].invalid && signInForm.controls['email'].touched || regError">
+      {{ errorText }}
+    </div>
   </div>
   <div class="form-group">
     <app-atom-label for="userPass" labelName="Password"></app-atom-label>
     <input type="text" formControlName="password" id="userPass" class="form-control">
   </div>
+  <div class="form-group">
+    <div class="alert-danger" *ngIf="loginError">
+      {{ errorText }}
+    </div>
+  </div>
+
   <button type="submit" class="btn btn-dark" [disabled]="!signInForm.valid">login</button>
 </form>
+
 <form [formGroup]="createPost" (ngSubmit)="newPost(createPost.value)" *ngIf="addPost">
   <div class="form-group">
     <app-atom-label for="title" labelName="Title"></app-atom-label>
