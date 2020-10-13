@@ -18,15 +18,15 @@ export class BlogService {
     return this.http.get<Array<UserPost>>(this.url);
   }
 
-  addPost(payload: UserPost) {
+  addPost(payload: UserPost): Observable<UserPost> {
     return this.http.post<UserPost>(this.url, payload);
   }
 
-  deletePost(payload: UserPost) {
+  deletePost(payload: UserPost): Observable<UserPost> {
     return this.http.delete<UserPost>(`${this.url}/${payload.id}`);
   }
 
-  updatePost(payload: UserPost) {
+  updatePost(payload: UserPost): Observable<UserPost> {
     return this.http.put<UserPost>(`${this.url}/${payload.id}`, payload);
   }
 

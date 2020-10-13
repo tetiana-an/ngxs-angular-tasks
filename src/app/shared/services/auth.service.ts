@@ -3,16 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { User } from '../models/user.model';
 
-
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
   private url: string;
-  currentUser: any;
-  adminStatus: boolean;
-  userStatus: boolean;
+  currentUser: string | object;
   user: Subject<any> = new Subject<any>();
 
   constructor(private http: HttpClient) {
@@ -23,19 +20,17 @@ export class AuthService {
     return this.http.get<Array<User>>(this.url);
   }
 
-  addUser(payload: User) {
+  addUser(payload: User): Observable<User> {
     return this.http.post<User>(this.url, payload);
   }
 
-  getLocalUser(): any {
+  getLocalUser(): string | Object {
     return this.currentUser = JSON.parse(localStorage.getItem('localUser'));
   }
 
-
-  signOut(): any {
+  signOut(): void {
     this.currentUser = null;
     localStorage.setItem('localUser', JSON.stringify(this.currentUser));
-
   }
 
 }

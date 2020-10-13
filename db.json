@@ -15,46 +15,18 @@
       "id": 2
     },
     {
-      "name": "lina",
-      "email": "lina@gmail.com",
-      "password": "5555",
+      "name": "mia",
+      "email": "mia@gmail.com",
+      "password": "7777",
       "role": "user",
       "id": 3
     },
     {
-      "name": "ksks",
-      "email": "user26@gmail.com",
-      "password": "888554",
+      "name": "test",
+      "email": "test@gmail.com",
+      "password": "7777",
       "role": "user",
       "id": 4
-    },
-    {
-      "name": "nastia",
-      "email": "user58@gmail.com",
-      "password": "888554",
-      "role": "user",
-      "id": 5
-    },
-    {
-      "name": "mia",
-      "email": "mia10@gmail.com",
-      "password": "888554",
-      "role": "user",
-      "id": 6
-    },
-    {
-      "name": "mia",
-      "email": "mia12@gmail.com",
-      "password": "2222",
-      "role": "user",
-      "id": 7
-    },
-    {
-      "name": "nastia",
-      "email": "user5@gmail.com",
-      "password": "2222",
-      "role": "user",
-      "id": 8
     }
   ],
   "posts": [
@@ -69,10 +41,18 @@
     {
       "id": 2,
       "userID": 2,
-      "title": "Second Post 2.0",
+      "title": "Second Post 2.0.4",
       "author": "Tania",
       "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum reprehenderit perspiciatis non id eius, aliquam dolore magnam officia odit provident.",
-      "date": "2020-10-11T22:48:21.589Z"
+      "date": "2020-10-13T13:45:02.434Z"
+    },
+    {
+      "id": 3,
+      "userID": 2,
+      "title": "title 2.4",
+      "author": "Tania",
+      "text": "some text",
+      "date": "2020-10-13T13:50:04.691Z"
     }
   ]
 }

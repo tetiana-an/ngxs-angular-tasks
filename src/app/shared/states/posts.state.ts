@@ -19,7 +19,7 @@ export class PostStateModel {
 @Injectable()
 export class PostState {
     @Selector()
-    static getPosts({ posts }: PostStateModel ): UserPost[] {
+    static getPosts({ posts }: PostStateModel): UserPost[] {
         return posts
     }
 
@@ -36,12 +36,12 @@ export class PostState {
 
     @Action(AddPost)
     add({ getState, patchState }: StateContext<PostStateModel>, { payload }: AddPost) {
-      return this.blog.addPost(payload).pipe(tap((res) => {
-        const state = getState();
-        patchState({
-          posts: [...state.posts, res]
-        });
-      }));
+        return this.blog.addPost(payload).pipe(tap((res) => {
+            const state = getState();
+            patchState({
+                posts: [...state.posts, res]
+            });
+        }));
     }
 
     @Action(RemovePost)

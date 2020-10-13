@@ -15,7 +15,7 @@
         <td>{{ s.regId }}</td>
         <td>{{ s.name }}</td>
         <td>{{ s.address }}</td>
-        <td><button type="button" (click)="openModal(template)" (click)="editStudent(s, i)"
+        <td><button type="button" (click)="openModal(template, s)"
             class="btn btn-warning">edit</button>
         </td>
         <td><button type="button" (click)="delStudent(s.regId)" class="btn btn-danger">delete</button></td>

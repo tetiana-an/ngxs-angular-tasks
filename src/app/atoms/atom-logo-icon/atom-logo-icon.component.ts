@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-atom-logo-icon',
-  templateUrl: './atom-logo-icon.component.html',
-  styleUrls: ['./atom-logo-icon.component.scss']
+  template: `<img src="../../../assets/icons/nucleus.svg" width="30px">`,
+  styles: [``]
 })
-export class AtomLogoIconComponent {
-
-}
+export class AtomLogoIconComponent {}

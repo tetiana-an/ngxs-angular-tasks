@@ -27,9 +27,8 @@ export class UsersState {
   constructor(private auth: AuthService) { }
 
   @Action(GetUsers)
-  get({ getState, patchState }: StateContext<UsersStateModel>) {
+  get({ patchState }: StateContext<UsersStateModel>) {
     return this.auth.getUsers().subscribe(data => {
-      const state = getState();
       patchState({
         users: data,
       });

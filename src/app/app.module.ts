@@ -24,8 +24,6 @@ import { Task1Component } from './pages/task1/task1.component';
 import { Task2Component } from './pages/task2/task2.component';
 import { AtomButtonComponent } from './atoms/atom-button/atom-button.component';
 import { FormComponent } from './molecules/form/form.component';
-import { AtomErrorComponent } from './atoms/atom-error/atom-error.component';
-import { AtomLabelComponent } from './atoms/atom-label/atom-label.component';
 import { AtomInputComponent } from './atoms/atom-input/atom-input.component';
 import { UsersState } from './shared/states/user.state';
 import { AuthService } from './shared/services/auth.service';
@@ -38,6 +36,7 @@ import { loaderConfig } from './preloader-config';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -54,8 +53,6 @@ import { MatInputModule } from '@angular/material/input';
     Task2Component,
     AtomButtonComponent,
     FormComponent,
-    AtomErrorComponent,
-    AtomLabelComponent,
     AtomInputComponent,
     CardComponent,
     AtomTextareaComponent,
@@ -80,7 +77,8 @@ import { MatInputModule } from '@angular/material/input';
     NgxUiLoaderRouterModule,
     MatButtonModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [AuthService, BsModalRef],
   bootstrap: [AppComponent]

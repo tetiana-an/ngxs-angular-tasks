@@ -11,7 +11,15 @@ import { PostState } from 'src/app/shared/states/posts.state';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss'],
+  styles: [
+    `.card {
+    margin: 50px auto;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: flex-end;
+    }`
+  ],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => CardComponent),
@@ -23,10 +31,9 @@ export class CardComponent implements OnInit {
   @Select(PostState.getPosts)
   arrPosts$: Observable<UserPost[]>;
   modalRef: BsModalRef;
-  currentUser = JSON.parse(localStorage.getItem('localUser'));;
+  currentUser = JSON.parse(localStorage.getItem('localUser'));
   currentPost = JSON.parse(localStorage.getItem('localPost'));
   editStatus: boolean;
-  changePost: boolean;
 
   constructor(private store: Store,
     private modalService: BsModalService, private auth: AuthService) { }
@@ -39,8 +46,8 @@ export class CardComponent implements OnInit {
 
   private userInfo(): void {
     this.auth.user.subscribe(() => {
-        this.getLocalStorage();
-      }
+      this.getLocalStorage();
+    }
     );
   }
 
@@ -51,7 +58,7 @@ export class CardComponent implements OnInit {
   }
 
   editPost(post: UserPost, template: TemplateRef<any>) {
-    this.changePost = true;
+    this.editStatus = true;
     localStorage.setItem('localPost', JSON.stringify(post));
     this.modalRef = this.modalService.show(template);
   }
@@ -59,5 +66,5 @@ export class CardComponent implements OnInit {
   deletePost(post: UserPost) {
     this.store.dispatch([new RemovePost(post), new GetPosts()])
   }
-
+  
 }

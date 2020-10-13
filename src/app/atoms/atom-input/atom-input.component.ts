@@ -1,37 +1,38 @@
 import { Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-atom-input',
   templateUrl: './atom-input.component.html',
-  styleUrls: ['./atom-input.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => AtomInputComponent),
     multi: true
   }]
 })
+
 export class AtomInputComponent implements ControlValueAccessor {
-  @Input()
-  type: any;
-
-  @Input()
-  id: string;
-
-  @Input()
-  name: string;
-
   @Input()
   labelName: string;
 
   @Input()
-  labelfor: string;
+  placeholderText: string;
+
+  @Input()
+  formControlName: string;
+  
+  @Input() set control(value: FormControl) {
+    if (this.formControl !== value) {
+      this.formControl = value;
+    }
+  };
+
+  formControl: FormControl;
 
   value: string
 
   writeValue(value: string) {
     this.value = value
-    console.log(this.value);
   }
 
   registerOnChange(value): void {
@@ -43,6 +44,5 @@ export class AtomInputComponent implements ControlValueAccessor {
 
   setDisabledState?(isDisabled: boolean): void {
   }
-
 
 }

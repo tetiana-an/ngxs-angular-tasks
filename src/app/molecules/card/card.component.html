@@ -5,10 +5,12 @@
     <p class="card-text">{{ post?.text }}</p>
     <p>{{ post?.date | date : "mediumDate" }}</p>
   </div>
-  <div class="btn-group" *ngIf="currentUser !== null">
+  <div class="btn-group" *ngIf="!!currentUser">
     <app-atom-button label="edit" btnClass="btn btn-outline-warning" (click)="editPost(post, template)"
       *ngIf="currentUser.id === post.userID"></app-atom-button>
-    <app-atom-button label="delete" btnClass="btn btn-outline-danger" *ngIf="currentUser.id === post.userID || currentUser.role === 'admin'" (click)="deletePost(post)"></app-atom-button>
+    <app-atom-button label="delete" btnClass="btn btn-outline-danger"
+      *ngIf="currentUser.id === post.userID || currentUser.role === 'admin'" (click)="deletePost(post)">
+    </app-atom-button>
   </div>
 </div>
 <ng-template #template>
@@ -18,6 +20,6 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-form [update]="changePost" (closeClick)="modalRef.hide()"></app-form>
+    <app-form [editPost]="editStatus" (closeClick)="modalRef.hide()"></app-form>
   </div>
 </ng-template>

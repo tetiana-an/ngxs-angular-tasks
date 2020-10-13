@@ -1,64 +1,18 @@
 <form [formGroup]="signUpForm" (ngSubmit)="signUp(signUpForm.value)" *ngIf="register">
-  <div class="form-group">
-    <app-atom-label for="userName" labelName="Name"></app-atom-label>
-    <input type="text" formControlName="userName" id="userName" class="form-control">
-  </div>
-  <div class="form-group">
-    <app-atom-label for="userEmail" labelName="Email"></app-atom-label>
-    <input type="text" formControlName="email" id="userEmail" class="form-control">
-    <div class="alert-danger"
-      *ngIf="signUpForm.controls['email'].invalid && signUpForm.controls['email'].touched || regError">
-      {{ errorText }}
-    </div>
-  </div>
-  <div class="form-group">
-    <app-atom-label for="userPass" labelName="Password"></app-atom-label>
-    <input type="text" formControlName="password" id="userPass" class="form-control">
-  </div>
-  <button type="submit" class="btn btn-dark" [disabled]="!signUpForm.valid">register</button>
+  <app-atom-input labelName="Enter your name" [control]="signUpForm.controls.userName"></app-atom-input>
+  <app-atom-input labelName="Enter your email" placeholder="pat@example.com" [control]="signUpForm.controls.email" ></app-atom-input>
+  <app-atom-input labelName="Enter your password" [control]="signUpForm.controls.password"></app-atom-input>
+  <app-atom-button type="submit" btnClass="btn btn-dark" label="register" [btnDisabled]="!signUpForm.valid"></app-atom-button>
 </form>
 
 <form [formGroup]="signInForm" (ngSubmit)="signIn(signInForm.value)" *ngIf="login">
-  <div class="form-group">
-    <app-atom-label for="userEmail" labelName="Email"></app-atom-label>
-    <input type="text" formControlName="email" id="userEmail" class="form-control">
-    <div class="alert-danger"
-      *ngIf="signInForm.controls['email'].invalid && signInForm.controls['email'].touched || regError">
-      {{ errorText }}
-    </div>
-  </div>
-  <div class="form-group">
-    <app-atom-label for="userPass" labelName="Password"></app-atom-label>
-    <input type="text" formControlName="password" id="userPass" class="form-control">
-  </div>
-  <div class="form-group">
-    <div class="alert-danger" *ngIf="loginError">
-      {{ errorText }}
-    </div>
-  </div>
-
-  <button type="submit" class="btn btn-dark" [disabled]="!signInForm.valid">login</button>
+  <app-atom-input labelName="Enter your email" placeholder="pat@example.com" [control]="signInForm.controls.email"></app-atom-input>
+  <app-atom-input labelName="Enter your password" [control]="signInForm.controls.password"></app-atom-input>
+  <app-atom-button type="submit" btnClass="btn btn-dark" label="login" [btnDisabled]="!signInForm.valid"></app-atom-button>
 </form>
 
-<form [formGroup]="createPost" (ngSubmit)="newPost(createPost.value)" *ngIf="addPost">
-  <div class="form-group">
-    <app-atom-label for="title" labelName="Title"></app-atom-label>
-    <input type="text" formControlName="title" id="title" class="form-control">
-  </div>
-  <div class="form-group">
-    <app-atom-label for="text" labelName="Text"></app-atom-label>
-    <textarea formControlName="text" name="text" id="text" class="form-control"></textarea>
-  </div>
-  <button type="submit" class="btn btn-outline-success" [disabled]="!createPost.valid">add post</button>
-</form>
-<form [formGroup]="updatePostForm" (ngSubmit)="updatePost(updatePostForm.value)" *ngIf="update">
-  <div class="form-group">
-    <app-atom-label for="title" labelName="Title"></app-atom-label>
-    <input type="text" formControlName="title" id="title" class="form-control">
-  </div>
-  <div class="form-group">
-    <app-atom-label for="text" labelName="Text"></app-atom-label>
-    <textarea formControlName="text" name="text" id="text" class="form-control"></textarea>
-  </div>
-  <button type="submit" class="btn btn-outline-success" [disabled]="!updatePostForm.valid">save edit</button>
+<form [formGroup]="createPost" (ngSubmit)="newPost(createPost.value)" *ngIf="addPost || editPost">
+  <app-atom-input labelName="Title" [control]="createPost.controls.title"></app-atom-input>
+  <app-atom-input labelName="Text" [control]="createPost.controls.text"></app-atom-input>
+  <app-atom-button type="submit" btnClass="btn btn-dark" label="add post" [btnDisabled]="!createPost.valid"></app-atom-button>
 </form>

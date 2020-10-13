@@ -2,7 +2,7 @@ import { Component, TemplateRef } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { EditStudent, RemoveStudent } from 'src/app/shared/actions/students.action';
 import { Student } from 'src/app/shared/models/students.model';
-import { Observable } from 'rxjs'
+import { Observable } from 'rxjs';
 import { StudentState } from 'src/app/shared/states/students.state';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -21,23 +21,16 @@ export class ViewstudentComponent {
   address: string;
   editIndex: number;
 
-  constructor( private store: Store, 
-               private modalService: BsModalService ) { }
+  constructor( private store: Store, private modalService: BsModalService ) { }
 
   public changeForm = new FormGroup({
-    id: new FormControl('',),
-    name: new FormControl('',),
-    address: new FormControl('',),
+    id: new FormControl(''),
+    name: new FormControl(''),
+    address: new FormControl(''),
   });
 
   delStudent(regId) {
-    this.store.dispatch(new RemoveStudent(regId))
-  }
-
-  editStudent(student: Student, index: number): void {
-    this.id = student.regId;
-    this.name = student.name;
-    this.address = student.address;
+    this.store.dispatch(new RemoveStudent(regId));
   }
 
   saveEditStudent(formData: FormData): void {
@@ -45,8 +38,11 @@ export class ViewstudentComponent {
     this.store.dispatch(new EditStudent(updateStudent))
   }
 
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>, student: Student): void {
     this.modalRef = this.modalService.show(template);
+    this.id = student.regId;
+    this.name = student.name;
+    this.address = student.address;
   }
 
 
