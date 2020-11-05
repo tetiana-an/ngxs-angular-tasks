@@ -22,21 +22,49 @@ export class Task2Component implements AfterViewInit {
   isRegister: boolean;
   isLogin: boolean;
   isCreatePost: boolean;
+  arrCircls = [{ title: "Menu1", rot: 0 }, { title: "Menu2", rot: 0 }, { title: "Menu3", rot: 0 }, { title: "Menu4", rot: 0 }, { title: "Menu5", rot: 0 }, { title: "Menu6", rot: 0 }]
+  data: string;
 
-  constructor( private modalService: BsModalService,
-               private auth: AuthService, private store: Store ) { }
+  nbOptions = 8;
+  angleStart = -360;
+
+  constructor(private modalService: BsModalService,
+    private auth: AuthService, private store: Store) { }
 
   ngAfterViewInit() {
     this.currentUser = JSON.parse(localStorage.getItem('localUser'));
     this.store.dispatch(new GetPosts())
     this.userInfo();
     this.getLocalStorage();
+    this.setStyle()
+  }
+
+  getSel (sel) {
+    return document.querySelectorAll(sel);
+  };
+  
+
+  setStyle() {
+    
+   this.getSel('li#li').forEach(elem => {
+      let p = document.createElement('p');
+      p.textContent = elem.name;  
+      elem.appendChild(p);
+      console.log(elem);
+      console.log(p);
+   });
+    
+    let deg = 360 / this.arrCircls.length
+    console.log(deg);
+
+    this.arrCircls.forEach(elem => {
+    })
   }
 
   private userInfo(): void {
-     this.auth.user.subscribe(() => {
-        this.getLocalStorage();
-      }
+    this.auth.user.subscribe(() => {
+      this.getLocalStorage();
+    }
     );
   }
 
@@ -64,7 +92,7 @@ export class Task2Component implements AfterViewInit {
     this.isCreatePost = true;
   }
 
-  signOut(){
+  signOut() {
     this.reset();
     this.auth.signOut();
     this.auth.user.next(this.currentUser);
@@ -76,6 +104,6 @@ export class Task2Component implements AfterViewInit {
     this.isCreatePost = false;
   }
 
-  
+
 
 }
